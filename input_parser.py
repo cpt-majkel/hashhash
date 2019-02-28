@@ -27,8 +27,14 @@ def transition_score(s1, s2):
     return min(union, difference1, difference2)
 
 
+def save_to_output_file(output_filepath, slides):
+    with open(output_filepath, 'w') as output_file:
+        output_file.write('{}\n'.format(len(slides)))
+        output_file.writelines('\n'.join(map(str, slides)))
+
+
 if __name__ == '__main__':
-    photos = list(fetch_photos('inputs/b_lovely_landscapes.txt'))
+    photos = list(fetch_photos('inputs/a_example.txt'))
     horizontal = [p for p in photos if p.orientation == 'H']
     vertical = [p for p in photos if p.orientation == 'V']
 
@@ -38,3 +44,4 @@ if __name__ == '__main__':
     slides = slides_horizontal + slides_vertical
 
     print(total_score(slides))
+    save_to_output_file('inputs/output.txt', slides)
