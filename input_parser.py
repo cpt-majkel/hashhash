@@ -10,3 +10,17 @@ def fetch_photos(input_filepath: str):
                         orientation=orientation,
                         number_of_tags=int(number_of_tags),
                         tags=set(tags))
+
+
+def total_score(photos):
+    result = 0
+    for p1, p2 in zip(photos[:-1], photos[1:]):
+        result += transition_score(p1, p2)
+    return result
+
+
+def transition_score(s1, s2):
+    union = len(s1.tags.union(s2.tags))
+    difference1 = len(s1.tags - s2.tags)
+    difference2 = len(s2.tags - s1.tags)
+    return min(union, difference1, difference2)
