@@ -1,5 +1,6 @@
 from Photo import Photo
 from Slide import Slide
+from random import shuffle
 
 
 def fetch_photos(input_filepath: str):
@@ -31,10 +32,19 @@ if __name__ == '__main__':
     photos = list(fetch_photos('inputs/b_lovely_landscapes.txt'))
     horizontal = [p for p in photos if p.orientation == 'H']
     vertical = [p for p in photos if p.orientation == 'V']
-
     slides_horizontal = [Slide([h]) for h in horizontal]
-    slides_vertical = [Slide([v1, v2]) for v1, v2 in zip(vertical[::2], vertical[1::2])]
+    best = 0
 
-    slides = slides_horizontal + slides_vertical
+    for i in range(10):
+        shuffle(vertical)
+        slides_vertical = [Slide([v1, v2]) for v1, v2 in zip(vertical[::2], vertical[1::2])]
+        slides = slides_horizontal + slides_vertical
+        shuffle(slides)
+        solution = total_score(slides)
+        print(solution)
+        if solution > best:
+            best = solution
+            best_vertical = list(vertical)
+            best_slides = list(slides)
 
-    print(total_score(slides))
+    print(best)
