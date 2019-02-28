@@ -7,3 +7,6 @@ class Slide(object):
 
     def __str__(self):
         return ' '.join(map(str, self.photos))
+
+    def __repr__(self):
+        return str(self)
