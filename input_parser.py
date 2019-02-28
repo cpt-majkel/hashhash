@@ -1,4 +1,5 @@
 from Photo import Photo
+from Slide import Slide
 
 
 def fetch_photos(input_filepath: str):
@@ -24,3 +25,16 @@ def transition_score(s1, s2):
     difference1 = len(s1.tags - s2.tags)
     difference2 = len(s2.tags - s1.tags)
     return min(union, difference1, difference2)
+
+
+if __name__ == '__main__':
+    photos = list(fetch_photos('inputs/b_lovely_landscapes.txt'))
+    horizontal = [p for p in photos if p.orientation == 'H']
+    vertical = [p for p in photos if p.orientation == 'V']
+
+    slides_horizontal = [Slide([h]) for h in horizontal]
+    slides_vertical = [Slide([v1, v2]) for v1, v2 in zip(vertical[::2], vertical[1::2])]
+
+    slides = slides_horizontal + slides_vertical
+
+    print(total_score(slides))
