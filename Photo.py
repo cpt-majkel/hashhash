@@ -4,3 +4,6 @@ class Photo(object):
         self.orientation = orientation
         self.number_of_tags = number_of_tags
         self.tags = tags
+
+    def __str__(self):
+        return str(self.id)

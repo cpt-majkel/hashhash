@@ -4,3 +4,6 @@ class Slide(object):
         self.tags = set()
         for photo in photos:
             self.tags.update(photo.tags)
+
+    def __str__(self):
+        return ' '.join(map(str, self.photos))
