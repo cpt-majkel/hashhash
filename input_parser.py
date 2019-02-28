@@ -12,10 +12,10 @@ def fetch_photos(input_filepath: str):
                         tags=set(tags))
 
 
-def total_score(photos):
+def total_score(slides):
     result = 0
-    for p1, p2 in zip(photos[:-1], photos[1:]):
-        result += transition_score(p1, p2)
+    for s1, s2 in zip(slides[:-1], slides[1:]):
+        result += transition_score(s1, s2)
     return result
 
 
